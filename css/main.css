@@ -1,0 +1,21 @@
+body {
+	float:left;
+}
+
+h1 {
+	font-size: 40px;
+}
+
+.btn-primary {
+	margin-top: 10px;
+}
+
+#review-content {
+	resize:vertical;
+	overflow: auto;
+	height: 100px;
+	max-height: 400px;
+	min-height: 34px;
+}
+
+

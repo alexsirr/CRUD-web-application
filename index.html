@@ -1,0 +1,44 @@
+<!DOCTYPE <!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Product Review</title>
+
+		<script src="https://code.jquery.com/jquery.min.js"></script>
+    	<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+    	<script src="//www.parsecdn.com/js/parse-1.6.0.min.js"></script>
+    
+    	<script type="text/javascript" src="js/review.js"></script>
+		<link rel="stylesheet" href="css/main.css">	
+	</head>
+
+	<body>
+		<div class="container">
+			<h1>TITLE OF REVIEW THINGY</h1>
+			<p>Average Rating: </p>
+			<p>DESCRIPTION OF ITEM TO REVIEW</p>
+		</div>
+		<div class="container">
+			<h2>Write a review!</h2>
+			<form>
+				<div class="form-group">
+                    <input id="review-title" class="form-control" type="text" placeholder="Review Title"></input>
+                </div>
+                
+                <div class="form-group">
+                    <textarea id="review-content" class="form-control" type="text" placeholder="What did you think of this product?"></textarea>
+                </div>
+                <div class="form-group">
+                    <button id="submit-review" class="btn btn-primary" type="submit">Submit!</button>
+                </div> 	
+			</form>
+		</div>
+		<div class="container">
+			<h2>Reviews</h2>
+		</div>
+		
+	</body>
+</html>
