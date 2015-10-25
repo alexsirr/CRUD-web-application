@@ -15,7 +15,7 @@ $("#signup-form").submit(function() {
 		  success: function(user) {
 		    Parse.User.logIn($("#signup-name").val(), $("#signup-pass").val(), {
 			  success: function(user) {
-			    document.location.href = "http://localhost:8080/index.html";
+			    document.location.href = "index.html";
 			  },
 			  error: function(user, error) {
 			    alert("Error: " + error.message);
@@ -38,7 +38,7 @@ $("#signup-form").submit(function() {
 $("#signin-form").submit(function() {
 	Parse.User.logIn($("#signin-name").val(), $("#signin-pass").val(), {
 		success: function(user) {
-			document.location.href = "http://localhost:8080/index.html";
+			document.location.href = "index.html";
 		},
 		error: function(user, error) {
 			alert("No account found with that name");
