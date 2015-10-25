@@ -1,13 +1,38 @@
 body {
 	float:left;
+	font-style: Verdana;
 }
 
 h1 {
 	font-size: 40px;
 }
 
+ol {
+	list-style: none;
+}
+
+.review-div {
+	box-shadow: 10px 10px 5px #888888;
+	background-color: #E9EAEE;
+	border-radius: 25px;
+	padding-left: 10px;
+	padding-top: 2.5px;
+	padding-bottom: 5px;
+	margin:10px;
+}
+
 .btn-primary {
 	margin-top: 10px;
+}
+
+.voting {
+	float: right;
+	border: none;
+	background-color: #E9EAEE;
+}
+
+.voting:hover {
+	color: #888888;
 }
 
 #review-content {
