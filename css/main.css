@@ -4,10 +4,6 @@ body {
 	background-color: #fbf2f2;
 }
 
-h1 {
-	font-size: 40px;
-}
-
 h2 {
 	font-weight: bold;
 }
@@ -59,6 +55,11 @@ img {
 	color: #888888;
 }
 
+#main-title {
+	font-size: 40px;
+	margin-top: 70px;
+}
+
 #avg-rating {
 	margin-bottom: 10px;
 }
@@ -78,6 +79,42 @@ img {
 	border: none;
 	color: #990000;
 	background-color: #E9EAEE;
+}
+
+#signup {
+	font-size: 15px;
+	float: right;
+	margin-right: 40px;
+	margin-bottom: 10px;
+	font-variant: small-caps;
+	color: white;
+	font-weight: bold;
+}
+
+#navbar {
+	opacity: .9;
+	width: 100%;
+	background-color: #181C22;
+	position: absolute;
+}
+
+#navbar ul {
+	list-style-type: none;
+}
+
+#navbar li{
+	display: inline;
+}
+
+.account-fields {
+	background-color: #E9EAEE;
+	box-shadow: 10px 10px 5px #888888;
+	border-radius: 25px;
+	padding-top: 10px;
+}
+
+#signin-submit {
+	margin-top: 20px;
 }
 
 

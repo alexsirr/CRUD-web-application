@@ -9,13 +9,21 @@
 		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel="stylesheet">
 		<link rel="stylesheet" type="text/css" href="css/main.css">
 		<link href="//netdna.bootstrapcdn.com/font-awesome/latest/css/font-awesome.css" rel="stylesheet">
-        
-		<link rel="stylesheet" href="css/main.css">	
 	</head>
 
 	<body>
+		<nav id="navbar">
+        	<ul>	
+			    <li>
+			    	<form id="account-form" action="http://localhost:8080/account.html">
+   	 					<button id="signup" class="btn btn-sm btn-success" type="submit">Sign Up or Sign In</button>
+					</form>
+			    </li>
+			</ul>
+        </nav>
+
 		<div class="container">
-			<h1>Replica DogeCoin Race Car</h1>
+			<h1 id="main-title">Replica DogeCoin Race Car</h1>
 			<img src="res/Doge-Nascar.jpg"></img>
 			<p>Average Rating: <div id="avg-rating" class="raty"></div>
 			<p>
@@ -25,7 +33,7 @@
 		</div>
 		<div class="container">
 			<h2>Write a review!</h2>
-			<form>
+			<form id="review-form">
 				<div class="form-group">
 					<div id="user-rating" class="raty"></div>
 				</div>

@@ -2,43 +2,61 @@ Parse.initialize("LCURhPt8t0EgJg7IccyFwyFYQGd9q2dUCXAby2XR", "TXwEjUjRjdp0ObwlCp
 
 var Review = Parse.Object.extend('Review');
 
+var currentUser = Parse.User.current();
+
+if (currentUser != null) {
+	$("#signup").text("Logout");
+	$("#account-form").attr("action", "");
+}
+
+$("#signup").on("click", function() {
+	if (currentUser != null) {
+		$("#signup").text("Sign Up or Sign In");
+		Parse.User.logOut();
+	}
+});
+
 $("#user-rating").raty();
 
-$("form").submit(function() {
-	console.log("clicked");
-	var reviewItem = new Review();
 
-	var titleInput = $("#review-title");
-	var contentInput = $("#review-content");
+$("#review-form").submit(function() {
+	if (currentUser != null) {
+		var reviewItem = new Review();
 
-	if (titleInput.val().trim() == "" || contentInput.val().trim == "") {
-		alert("You must include a title and review content!");
-		return false;
-	} 
+		var titleInput = $("#review-title");
+		var contentInput = $("#review-content");
 
-	if ($("#user-rating").raty("score") == null) {
-		alert("Please enter a 1-5 rating for this product");
-		return false;
-	}
+		if (titleInput.val().trim() == "" || contentInput.val().trim == "") {
+			alert("You must include a title and review content!");
+			return false;
+		} 
 
-	var d = new Date();
-
-	reviewItem.set("title", titleInput.val());
-	reviewItem.set("content", contentInput.val());
-	reviewItem.set("rating", parseInt($("#user-rating").raty("score")));
-	reviewItem.set("votes", 0);
-	reviewItem.set("points", 0);
-	reviewItem.set("date", d.toDateString());
-
-	reviewItem.save(null, {
-		success: function() {
-			console.log("saved!");
-			titleInput.val("");
-			contentInput.val("");
-			$("#user-rating").raty({score: 0});
-			getData();
+		if ($("#user-rating").raty("score") == null) {
+			alert("Please enter a 1-5 rating for this product");
+			return false;
 		}
-	});
+
+		var d = new Date();
+
+		reviewItem.set("title", titleInput.val());
+		reviewItem.set("content", contentInput.val());
+		reviewItem.set("rating", parseInt($("#user-rating").raty("score")));
+		reviewItem.set("votes", 0);
+		reviewItem.set("points", 0);
+		reviewItem.set("date", d.toDateString());
+		reviewItem.set("user", Parse.User.current());
+
+		reviewItem.save(null, {
+			success: function() {
+				titleInput.val("");
+				contentInput.val("");
+				$("#user-rating").raty({score: 0});
+				getData();
+			}
+		});
+	} else {
+		alert("You must sign in to review this product!");
+	}
 	
 	return false;
 });
@@ -48,6 +66,7 @@ var getData = function() {
 
 	query.ascending("createdAt");
 	query.exists("title");
+	query.include("user");
 
 	query.find({
 		success: function (data) {
@@ -73,6 +92,7 @@ var addItem = function(item) {
 	var points = item.get("points");
 	var rating = item.get("rating");
 	var date = item.get("date");
+	var user = item.get("user");
 	
 	var li = $("<li></li>");
 	var div = $("<div class='review-div'></div>");
@@ -94,20 +114,36 @@ var addItem = function(item) {
 	});
 
 	upVote.on("click", function() {
-		item.set("points", points += 1);
-		item.set("votes", votes += 1);
-		item.save();
-		getData();
+		if (currentUser == null) {
+			alert("Must sign in to vote!");
+		} else if (currentUser.id == user.id) {
+			alert("Cheater! You cannot up vote your own review!");
+		} else {
+			// currentUser.addUnique("reviews", item.id);
+			// currentUser.save();
+			item.set("points", points += 1);
+			item.set("votes", votes += 1);
+			item.save();
+			getData();	
+		}
 	});
 
 	downVote.on("click", function() {
-		item.set("votes", votes += 1);
-		item.save();
-		getData();
+		if (currentUser == null) {
+			alert("Must sign in to vote!");
+		} else if (currentUser.id == user.id) {
+			alert("Why would you even want to down vote your own review??");
+		} else {
+			// currentUser.addUnique("reviews", item.id);
+			// currentUser.save();
+			item.set("votes", votes += 1);
+			item.save();
+			getData();
+		}
 	});
 
 	h2Title.text(title);
-	pDate.text("Created on " + date);
+	pDate.text("Created on " + date + " by " + user.getUsername( ));
 	h3Content.text(content);
 
 	if (votes == 0) {
@@ -116,7 +152,9 @@ var addItem = function(item) {
 		pPoints.text(points + " out of " + votes + " found this review helpful.");
 	}
 
-	pPoints.append(deleteButton);
+	if (currentUser != null && currentUser.id == user.id) {
+		pPoints.append(deleteButton);
+	}
 
 	h2Title.append(downVote);
 	h2Title.append(upVote);
