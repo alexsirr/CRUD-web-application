@@ -19,18 +19,23 @@ $("#signup-form").submit(function() {
 			  },
 			  error: function(user, error) {
 			    alert("Error: " + error.message);
+			    $("#signup-name").val("");
+				$("#signup-pass").val("");
+				$("#signin-name").val("");
+				$("#signin-pass").val("");
 			  }
 			});
 		  },
 		  error: function(user, error) {
 		    alert("Error: " + error.message);
+		    $("#signup-name").val("");
+			$("#signup-pass").val("");
+			$("#signin-name").val("");
+			$("#signin-pass").val("");
 		  }
 		});
 
-		$("#signup-name").val("");
-		$("#signup-pass").val("");
-		$("#signin-name").val("");
-		$("#signin-pass").val("");
+		
 	}
 	return false;
 });
@@ -41,14 +46,13 @@ $("#signin-form").submit(function() {
 			document.location.href = "index.html";
 		},
 		error: function(user, error) {
-			alert("No account found with that name");
+			alert("Error: " + error.message);
+			$("#signup-name").val("");
+			$("#signup-pass").val("");
+			$("#signin-name").val("");
+			$("#signin-pass").val("");
 		}	
 	});
-
-	$("#signup-name").val("");
-	$("#signup-pass").val("");
-	$("#signin-name").val("");
-	$("#signin-pass").val("");
 
 	return false;
 });
