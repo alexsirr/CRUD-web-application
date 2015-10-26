@@ -4,11 +4,13 @@ var Review = Parse.Object.extend('Review');
 
 var currentUser = Parse.User.current();
 
+// if there is a current user then the signup should turn to logout
 if (currentUser != null) {
 	$("#signup").text("Logout");
 	$("#account-form").attr("action", "");
 }
 
+// Log user out if there is a current user
 $("#signup").on("click", function() {
 	if (currentUser != null) {
 		$("#signup").text("Sign Up or Sign In");
@@ -18,19 +20,21 @@ $("#signup").on("click", function() {
 
 $("#user-rating").raty();
 
-
 $("#review-form").submit(function() {
+	// require user to sign in to review
 	if (currentUser != null) {
 		var reviewItem = new Review();
 
 		var titleInput = $("#review-title");
 		var contentInput = $("#review-content");
 
+		// prevent no title in review
 		if (titleInput.val().trim() == "" || contentInput.val().trim == "") {
 			alert("You must include a title and review content!");
 			return false;
 		} 
 
+		// prevent no content in review
 		if ($("#user-rating").raty("score") == null) {
 			alert("Please enter a 1-5 rating for this product");
 			return false;
@@ -38,6 +42,7 @@ $("#review-form").submit(function() {
 
 		var d = new Date();
 
+		// set values
 		reviewItem.set("title", titleInput.val());
 		reviewItem.set("content", contentInput.val());
 		reviewItem.set("rating", parseInt($("#user-rating").raty("score")));
@@ -48,6 +53,7 @@ $("#review-form").submit(function() {
 
 		reviewItem.save(null, {
 			success: function() {
+				// reset inputs
 				titleInput.val("");
 				contentInput.val("");
 				$("#user-rating").raty({score: 0});
@@ -82,6 +88,7 @@ var buildList = function(data) {
 		rating += item.get("rating");
 		addItem(item);
 	});
+	// set avg rating stars
 	$("#avg-rating").raty({score: rating/(data.length), readOnly: true});
 }
 
@@ -94,6 +101,7 @@ var addItem = function(item) {
 	var date = item.get("date");
 	var user = item.get("user");
 	
+	// brick of elements
 	var li = $("<li></li>");
 	var div = $("<div class='review-div'></div>");
 	var upVote = $("<button class='voting'><span class='glyphicon glyphicon-thumbs-up'></span></button>");

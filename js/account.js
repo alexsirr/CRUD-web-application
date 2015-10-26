@@ -2,6 +2,7 @@ Parse.initialize("LCURhPt8t0EgJg7IccyFwyFYQGd9q2dUCXAby2XR", "TXwEjUjRjdp0ObwlCp
 
 Parse.User.logOut();
 
+// user signup form
 $("#signup-form").submit(function() {
 	if ($("#signup-name").val() == "" && $("#signup-pass").val() == "") {
 		alert("Cannot signup an empty account!");
@@ -34,6 +35,7 @@ $("#signup-form").submit(function() {
 	return false;
 });
 
+// user sign in form
 $("#signin-form").submit(function() {
 	Parse.User.logIn($("#signin-name").val(), $("#signin-pass").val(), {
 		success: function(user) {
@@ -48,6 +50,7 @@ $("#signin-form").submit(function() {
 	return false;
 });
 
+// clears all input fields
 var clearInput = function() {
 	$("#signup-name").val("");
 	$("#signup-pass").val("");
