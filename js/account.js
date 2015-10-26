@@ -19,19 +19,13 @@ $("#signup-form").submit(function() {
 			  },
 			  error: function(error) {
 			    alert("Error: " + error.message);
-			    $("#signup-name").val("");
-				$("#signup-pass").val("");
-				$("#signin-name").val("");
-				$("#signin-pass").val("");
+			    clearInput();
 			  }
 			});
 		  },
 		  error: function(user, error) {
 		    alert("Error: " + error.message);
-		    $("#signup-name").val("");
-			$("#signup-pass").val("");
-			$("#signin-name").val("");
-			$("#signin-pass").val("");
+		   	clearInput();
 		  }
 		});
 
@@ -47,12 +41,16 @@ $("#signin-form").submit(function() {
 		},
 		error: function(error) {
 			alert("Error: " + error.message);
-			$("#signup-name").val("");
-			$("#signup-pass").val("");
-			$("#signin-name").val("");
-			$("#signin-pass").val("");
+			clearInput();	
 		}	
 	});
 
 	return false;
 });
+
+var clearInput = function() {
+	$("#signup-name").val("");
+	$("#signup-pass").val("");
+	$("#signin-name").val("");
+	$("#signin-pass").val("");
+}
