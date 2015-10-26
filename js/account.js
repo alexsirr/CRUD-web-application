@@ -17,7 +17,7 @@ $("#signup-form").submit(function() {
 			  success: function(user) {
 			    document.location.href = "index.html";
 			  },
-			  error: function(user, error) {
+			  error: function(error) {
 			    alert("Error: " + error.message);
 			    $("#signup-name").val("");
 				$("#signup-pass").val("");
@@ -45,7 +45,7 @@ $("#signin-form").submit(function() {
 		success: function(user) {
 			document.location.href = "index.html";
 		},
-		error: function(user, error) {
+		error: function(error) {
 			alert("Error: " + error.message);
 			$("#signup-name").val("");
 			$("#signup-pass").val("");
